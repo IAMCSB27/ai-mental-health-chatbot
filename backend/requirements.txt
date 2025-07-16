@@ -1,4 +1,5 @@
 flask
+Flask-Session
 transformers
 torch
 flask-cors
