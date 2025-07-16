@@ -1,6 +1,6 @@
 flask
-flask-session
 transformers
 torch
-profanity-check @ git+https://github.com/IsmailTan/profanity-check.git
+flask-cors
 joblib
+profanity-check @ git+https://github.com/IsmailTan/profanity-check.git
