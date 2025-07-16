@@ -3,4 +3,5 @@ transformers
 torch
 flask-cors
 joblib
-profanity-check @ git+https://github.com/IsmailTan/profanity-check.git
+profanity-check @ git+https://github.com/rajat85/profanity-check.git
+
