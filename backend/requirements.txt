@@ -2,4 +2,5 @@ flask
 flask-session
 transformers
 torch
-profanity-check
+profanity-check @ git+https://github.com/IsmailTan/profanity-check.git
+joblib
