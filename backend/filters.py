@@ -1,4 +1,6 @@
-from profanity import contains_profanity
+from better_profanity import profanity
+
+profanity.load_censor_words()
 
 def is_offensive(text):
-    return contains_profanity(text)
+    return profanity.contains_profanity(text)

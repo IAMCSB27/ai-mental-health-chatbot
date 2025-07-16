@@ -3,4 +3,5 @@ Flask-Session
 transformers
 torch
 flask-cors
-profanity
+better-profanity
+
