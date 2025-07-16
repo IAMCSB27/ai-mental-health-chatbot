@@ -1,5 +1,4 @@
-from profanity_check.profanity_check import predict
+from profanity import contains_profanity
 
 def is_offensive(text):
-    result = predict([text])
-    return result[0] == 1
+    return contains_profanity(text)
