@@ -10,6 +10,10 @@ sdk: docker
 pinned: false
 license: mit
 ---
-# AI Mental Health Chatbot
 
-This is an AI-powered mental health support chatbot...
+# Mental Health Chatbot
+
+This chatbot helps users with AI-powered mental health support.
+
+Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+
