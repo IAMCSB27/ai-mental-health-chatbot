@@ -1,0 +1,5 @@
+flask
+flask-session
+transformers
+torch
+profanity-check

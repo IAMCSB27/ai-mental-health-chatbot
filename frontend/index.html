@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Mental Health Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+  <div id="login-section">
+    <input type="text" id="username" placeholder="Enter your name" />
+    <button id="login-btn">Login</button>
+  </div>
+
+  <div id="main-container" style="display: none;">
+    <div id="avatar-canvas"></div>
+    <div id="chatbox">
+      <div id="chat-log"></div>
+      <form id="chat-form">
+        <input type="text" id="user-input" placeholder="How are you feeling?" />
+        <button type="submit">Send</button>
+      </form>
+      <button onclick="location.href='profile.html'">📜 My Profile</button>
+    </div>
+  </div>
+</body>
+</html>

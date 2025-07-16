@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Profile</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    #history { background: #fff; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Chat History</h1>
+  <div id="history">Loading...</div>
+  <button onclick="exportCSV()">Export as CSV</button>
+
+  <script>
+    async function loadHistory() {
+      const res = await fetch("http://localhost:5000/history");
+      const data = await res.json();
+      const div = document.getElementById("history");
+
+      if (data.error) return div.innerHTML = data.error;
+
+      div.innerHTML = "";
+      data.history.forEach(([user, bot]) => {
+        div.innerHTML += `<p><strong>You:</strong> ${user}<br/><strong>Bot:</strong> ${bot}</p><hr>`;
+      });
+    }
+
+    function exportCSV() {
+      fetch("http://localhost:5000/history")
+        .then(res => res.json())
+        .then(data => {
+          let csv = "User,Bot\n";
+          data.history.forEach(([u, b]) => {
+            csv += `"${u}","${b}"\n`;
+          });
+
+          const blob = new Blob([csv], { type: "text/csv" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `${data.username}_chat_log.csv`;
+          a.click();
+        });
+    }
+
+    loadHistory();
+  </script>
+</body>
+</html>
