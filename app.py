@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, session
 from flask_session import Session
-from transformers import AutoModelForCausalLM, AutoTokenizer
 from filters import is_offensive
 from dialogue_script import get_fallback_response
 from log_user import log_message
@@ -10,9 +9,6 @@ app = Flask(__name__)
 app.secret_key = "super_secret_key"
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
-tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-small")
-model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-small")
 
 chat_logs = {}
 USERS_FILE = "users.json"
@@ -60,11 +56,8 @@ def chat():
     if is_offensive(user_input):
         response = "Let’s keep things respectful. I'm here to help."
     else:
-        input_ids = tokenizer.encode(user_input + tokenizer.eos_token, return_tensors='pt')
-        output_ids = model.generate(input_ids, max_length=100, pad_token_id=tokenizer.eos_token_id)
-        response = tokenizer.decode(output_ids[:, input_ids.shape[-1]:][0], skip_special_tokens=True)
-        if not response.strip():
-            response = get_fallback_response()
+        # Temporarily use fallback until DialoGPT or lightweight chatbot is added
+        response = get_fallback_response()
 
     chat_logs[username].append((user_input, response))
     log_message(user_input, response)

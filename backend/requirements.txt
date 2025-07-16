@@ -1,7 +1,0 @@
-flask
-Flask-Session
-transformers
-torch
-flask-cors
-better-profanity
-
