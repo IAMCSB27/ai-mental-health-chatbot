@@ -1,3 +1,4 @@
-gradio
+flask
+flask_session
 transformers
 torch
