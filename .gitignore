@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Docker and environment
+*.env
+.env
+.env.*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Editor/IDE folders
+.vscode/
+.idea/
+
+# Logs and local artifacts
+*.log
+*.sqlite3
+*.db
+*.pid
+
+# Temporary or mistaken files
+main
+mental-health-chatbot/
+
+# OS or swap files
+*~
+*.swp
+
