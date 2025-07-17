@@ -1,5 +1,6 @@
 flask
+better_profanity
 flask_session
 transformers
 torch
-better_profanity
+
