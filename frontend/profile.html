@@ -1,50 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Profile</title>
-  <style>
-    body { font-family: sans-serif; padding: 2rem; }
-    #history { background: #fff; padding: 1rem; border-radius: 8px; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Profile - Mental Health Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Chat History</h1>
-  <div id="history">Loading...</div>
-  <button onclick="exportCSV()">Export as CSV</button>
+  <div id="profile-container" class="profile-box">
+    <h2>User Chat History</h2>
+    <div id="user-info">
+      <strong>Username:</strong> <span id="profile-username"></span>
+    </div>
+    <div id="history-log"></div>
+    <button onclick="goBack()">⬅ Back to Chat</button>
+  </div>
 
   <script>
-    async function loadHistory() {
-      const res = await fetch("http://localhost:5000/history");
-      const data = await res.json();
-      const div = document.getElementById("history");
-
-      if (data.error) return div.innerHTML = data.error;
-
-      div.innerHTML = "";
-      data.history.forEach(([user, bot]) => {
-        div.innerHTML += `<p><strong>You:</strong> ${user}<br/><strong>Bot:</strong> ${bot}</p><hr>`;
-      });
-    }
-
-    function exportCSV() {
-      fetch("http://localhost:5000/history")
-        .then(res => res.json())
-        .then(data => {
-          let csv = "User,Bot\n";
-          data.history.forEach(([u, b]) => {
-            csv += `"${u}","${b}"\n`;
-          });
-
-          const blob = new Blob([csv], { type: "text/csv" });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = `${data.username}_chat_log.csv`;
-          a.click();
+    async function loadProfile() {
+      const username = localStorage.getItem("username");
+      if (!username) {
+        alert("You must be logged in.");
+        window.location.href = "index.html";
+        return;
+      }
+      try {
+        const res = await fetch("http://localhost:5000/history", {
+          method: "GET",
+          credentials: "include"
         });
+        const data = await res.json();
+        if (data.error) {
+          alert("Please login again.");
+          window.location.href = "index.html";
+          return;
+        }
+        document.getElementById("profile-username").textContent = data.username;
+        const historyContainer = document.getElementById("history-log");
+        historyContainer.innerHTML = "";
+        data.history.forEach(([userMsg, botMsg]) => {
+          const userDiv = document.createElement("div");
+          userDiv.className = "user-msg";
+          userDiv.textContent = userMsg;
+          historyContainer.appendChild(userDiv);
+          const botDiv = document.createElement("div");
+          botDiv.className = "bot-msg";
+          botDiv.textContent = botMsg;
+          historyContainer.appendChild(botDiv);
+        });
+      } catch (err) {
+        console.error("Failed to load profile:", err);
+        alert("Failed to load profile. Try again later.");
+      }
     }
-
-    loadHistory();
+    function goBack() {
+      window.location.href = "index.html";
+    }
+    loadProfile();
   </script>
 </body>
 </html>
