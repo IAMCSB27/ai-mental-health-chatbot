@@ -15,5 +15,5 @@ license: mit
 
 This chatbot helps users with AI-powered mental health support.
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
+Check out the configuration reference at [https://huggingface.co/docs/hub/spaces-config-reference](https://huggingface.co/spaces/IAMCSB27/mental-health-chatbot)
 
